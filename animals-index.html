@@ -1,0 +1,1277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet My Animal Friends!</title>
+
+<style>
+
+/* =====================================================
+   MEET MY ANIMAL FRIENDS
+   Premium Interactive Kids Experience
+===================================================== */
+
+:root {
+  --purple: #8865d5;
+  --purple-dark: #6144a5;
+  --pink: #ff8db7;
+  --mint: #8ce3c2;
+  --yellow: #ffd976;
+  --blue: #91d9ff;
+  --ink: #403358;
+  --muted: #817591;
+  --glass: rgba(255, 255, 255, 0.76);
+  --shadow: 0 24px 70px rgba(89, 64, 137, 0.16);
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 8% 12%, #ffd8e9 0%, transparent 32%),
+    radial-gradient(ellipse at 92% 15%, #d9e7ff 0%, transparent 33%),
+    radial-gradient(ellipse at 78% 90%, #d3f7e6 0%, transparent 34%),
+    radial-gradient(ellipse at 12% 85%, #fff0c8 0%, transparent 30%),
+    linear-gradient(135deg, #fcf7ff, #fffaf2 48%, #f0fff8);
+  background-attachment: fixed;
+}
+
+/* Soft animated ambient light */
+
+body::before,
+body::after {
+  position: fixed;
+  z-index: -1;
+  content: "";
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: .42;
+  pointer-events: none;
+  animation: ambientFloat 13s ease-in-out infinite alternate;
+}
+
+body::before {
+  top: 8%;
+  left: -150px;
+  background: #e8b9ff;
+}
+
+body::after {
+  right: -150px;
+  bottom: 4%;
+  background: #a8f0d9;
+  animation-delay: -6s;
+}
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.page {
+  position: relative;
+  width: min(1240px, 100%);
+  min-height: 100vh;
+  margin: auto;
+  padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 46px);
+  text-align: center;
+}
+
+/* Decorative emoji ribbon */
+
+.page > div:first-child {
+  display: inline-block;
+  padding: 12px 25px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 999px;
+  background: rgba(255,255,255,.55);
+  box-shadow:
+    0 8px 25px rgba(115, 82, 160, .09),
+    inset 0 1px 0 white;
+  backdrop-filter: blur(12px);
+  animation: ribbonIn .8s var(--ease) both;
+  transition: transform .35s var(--ease);
+}
+
+.page > div:first-child:hover {
+  transform: translateY(-4px) rotate(-2deg) scale(1.04);
+}
+
+/* Hero heading */
+
+h1 {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: 12px auto 14px;
+  color: var(--purple-dark);
+  font-size: clamp(34px, 5.5vw, 66px);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+  text-wrap: balance;
+  background: linear-gradient(
+    115deg,
+    #6046a4 4%,
+    #9872dc 38%,
+    #ed86b1 68%,
+    #8560cb 95%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 5px 12px rgba(126, 91, 184, .10));
+  animation:
+    titleReveal .9s .12s var(--ease) both,
+    titleShimmer 9s 1s ease-in-out infinite;
+}
+
+h1::after {
+  position: absolute;
+  right: 12%;
+  bottom: -12px;
+  left: 12%;
+  height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffb4d1,
+    #b8a1ff,
+    #a2e8d0,
+    transparent
+  );
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: underlineReveal .8s .7s var(--ease) forwards;
+}
+
+.subtitle {
+  max-width: 650px;
+  margin: 28px auto 36px;
+  color: #776b8b;
+  font-size: clamp(16px, 2.1vw, 22px);
+  font-weight: 500;
+  line-height: 1.8;
+  text-wrap: balance;
+  animation: fadeUp .8s .3s both;
+}
+
+/* =====================================================
+   ANIMAL SCENE — HERO CARD
+===================================================== */
+
+.scene {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 7px solid rgba(255, 255, 255, .96);
+  border-radius: clamp(22px, 3vw, 38px);
+  background: linear-gradient(145deg, #fff, #f6efff);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,.9),
+    0 10px 24px rgba(93, 66, 139, .08),
+    0 28px 65px rgba(93, 66, 139, .16),
+    0 55px 100px rgba(93, 66, 139, .06);
+  animation: sceneReveal 1s .25s var(--ease) both;
+  transition:
+    transform .5s var(--ease),
+    box-shadow .5s var(--ease);
+}
+
+/* Glowing frame */
+
+.scene::before {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border: 2px solid rgba(255,255,255,.55);
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+/* Gentle moving shine */
+
+.scene::after {
+  position: absolute;
+  z-index: 1;
+  top: -120%;
+  left: -55%;
+  width: 35%;
+  height: 340%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.2),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: sceneShine 9s 2s ease-in-out infinite;
+}
+
+.scene img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform .8s var(--ease), filter .6s ease;
+}
+
+.scene:hover img {
+  transform: scale(1.015);
+  filter: saturate(1.06);
+}
+
+/* =====================================================
+   INTERACTIVE ANIMAL HOTSPOTS
+===================================================== */
+
+.animal-hotspot {
+  position: absolute;
+  z-index: 3;
+  top: 22%;
+  height: 75%;
+  padding: 0;
+  border: 3px solid transparent;
+  border-radius: 40%;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateX(-50%);
+  transition:
+    background .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease,
+    transform .35s var(--ease);
+}
+
+/* Each animal's clickable area */
+
+#bunny {
+  left: 10%;
+  width: 18%;
+  --animal-glow: #ffb7d1;
+}
+
+#bear {
+  left: 28%;
+  width: 19%;
+  --animal-glow: #ffd48b;
+}
+
+#cat {
+  top: 28%;
+  left: 45%;
+  width: 17%;
+  height: 68%;
+  --animal-glow: #b9a5ff;
+}
+
+#lion {
+  left: 64%;
+  width: 19%;
+  --animal-glow: #ffce77;
+}
+
+#elephant {
+  left: 85%;
+  width: 20%;
+  --animal-glow: #93dfff;
+}
+
+.animal-hotspot:hover,
+.animal-hotspot:focus-visible {
+  border-color: rgba(255,255,255,.98);
+  background: color-mix(in srgb, var(--animal-glow) 23%, transparent);
+  box-shadow:
+    inset 0 0 30px rgba(255,255,255,.3),
+    0 0 0 3px var(--animal-glow),
+    0 0 24px var(--animal-glow);
+  outline: none;
+  transform: translateX(-50%) scale(1.035);
+  animation: hotspotPulse 1.5s ease-in-out infinite;
+}
+
+.animal-hotspot:active {
+  transform: translateX(-50%) scale(.96);
+}
+
+/* Keyboard focus is easy to see */
+
+.animal-hotspot:focus-visible {
+  outline: 4px solid #7250b7;
+  outline-offset: 4px;
+}
+
+/* =====================================================
+   HINT AND FOOTER
+===================================================== */
+
+.hint {
+  display: inline-block;
+  margin: 30px auto 0;
+  padding: 15px 24px;
+  border: 1px solid rgba(255,255,255,.95);
+  border-radius: 999px;
+  color: #6d5498;
+  background: rgba(255,255,255,.67);
+  box-shadow: 0 8px 28px rgba(92, 65, 138, .08);
+  font-size: clamp(15px, 1.7vw, 19px);
+  font-weight: 800;
+  line-height: 1.5;
+  backdrop-filter: blur(12px);
+  animation: hintFloat 3.5s ease-in-out infinite;
+  transition:
+    transform .3s var(--ease),
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.hint:hover {
+  transform: translateY(-4px);
+  background: white;
+  box-shadow: 0 14px 32px rgba(92, 65, 138, .13);
+}
+
+.note {
+  margin: 22px auto 0;
+  color: #978aa6;
+  font-size: clamp(12px, 1.35vw, 15px);
+  line-height: 1.7;
+  animation: fadeUp .8s .6s both;
+}
+
+/* =====================================================
+   MODAL — DIMMED BACKDROP
+===================================================== */
+
+.modal {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 22px;
+  background: rgba(38, 25, 63, .52);
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity .35s ease,
+    visibility .35s ease,
+    backdrop-filter .35s ease,
+    -webkit-backdrop-filter .35s ease;
+}
+
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: backdropReveal .4s ease both;
+}
+
+/* Floating light spots behind the dialog */
+
+.modal.open::before,
+.modal.open::after {
+  position: fixed;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  content: "";
+  filter: blur(50px);
+  opacity: .55;
+  pointer-events: none;
+  animation: ambientFloat 5s ease-in-out infinite alternate;
+}
+
+.modal.open::before {
+  top: 12%;
+  left: 10%;
+  background: #ffacd2;
+}
+
+.modal.open::after {
+  right: 10%;
+  bottom: 10%;
+  background: #b6a3ff;
+  animation-delay: -2s;
+}
+
+/* =====================================================
+   QUESTION DIALOG
+===================================================== */
+
+.dialog {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  width: min(590px, 100%);
+  max-height: calc(100vh - 44px);
+  max-height: calc(100svh - 44px);
+  overflow-y: auto;
+  padding: clamp(30px, 5vw, 52px);
+  border: 5px solid rgba(255,255,255,.98);
+  border-radius: clamp(26px, 4vw, 40px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 0% 0%, #fff1f7 0%, transparent 42%),
+    radial-gradient(ellipse at 100% 100%, #e6f9f0 0%, transparent 42%),
+    linear-gradient(145deg, #fffefa, #f5efff 65%, #fff8f4);
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.9),
+    0 18px 35px rgba(38, 25, 63, .13),
+    0 35px 100px rgba(30, 19, 54, .28),
+    inset 0 1px 0 white;
+  transform: translateY(30px) scale(.86);
+  opacity: 0;
+}
+
+.modal.open .dialog {
+  animation: dialogEntrance .65s cubic-bezier(.16, 1.25, .35, 1) .04s both;
+}
+
+/* Decorative circles */
+
+.dialog::before,
+.dialog::after {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.dialog::before {
+  top: -40px;
+  right: -32px;
+  width: 125px;
+  height: 125px;
+  border: 20px solid rgba(195, 170, 255, .12);
+}
+
+.dialog::after {
+  bottom: -42px;
+  left: -35px;
+  width: 105px;
+  height: 105px;
+  border: 18px solid rgba(255, 170, 205, .15);
+}
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  padding: 0;
+  border: 1px solid rgba(127, 94, 177, .09);
+  border-radius: 50%;
+  color: #725a98;
+  background: rgba(232, 222, 255, .85);
+  box-shadow: 0 4px 12px rgba(82, 59, 125, .07);
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform .3s var(--ease),
+    background .3s ease,
+    color .3s ease,
+    box-shadow .3s ease;
+}
+
+.close:hover {
+  color: white;
+  background: #e783ae;
+  box-shadow: 0 6px 18px rgba(231, 131, 174, .3);
+  transform: rotate(90deg) scale(1.08);
+}
+
+.close:active {
+  transform: rotate(90deg) scale(.93);
+}
+
+.close:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid #7c5bc2;
+  outline-offset: 4px;
+}
+
+/* =====================================================
+   ANIMAL EMOJI
+===================================================== */
+
+.animal-icon {
+  display: grid;
+  place-items: center;
+  width: clamp(105px, 17vw, 145px);
+  height: clamp(105px, 17vw, 145px);
+  margin: 0 auto 18px;
+  border: 3px solid white;
+  border-radius: 38%;
+  background:
+    radial-gradient(circle at 30% 25%, #fff 0%, transparent 43%),
+    linear-gradient(145deg, #ffe4ef, #e9ddff 55%, #d9f8eb);
+  box-shadow:
+    0 5px 0 rgba(255,255,255,.95),
+    0 12px 28px rgba(119, 83, 173, .13),
+    inset 0 0 20px rgba(255,255,255,.5);
+  font-size: clamp(58px, 10vw, 88px);
+  line-height: 1;
+  transform-origin: center bottom;
+}
+
+.modal.open .animal-icon {
+  animation: animalBounce .9s .35s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+
+/* =====================================================
+   ANIMAL NAME
+===================================================== */
+
+.animal-name {
+  display: inline-block;
+  margin: 6px 0 20px;
+  padding: 9px 19px;
+  border: 1px solid rgba(137, 102, 205, .1);
+  border-radius: 999px;
+  color: #7955bc;
+  background: rgba(230, 219, 255, .48);
+  font-size: clamp(16px, 2.5vw, 21px);
+  font-weight: 900;
+  line-height: 1.5;
+  animation: fadeUp .5s .28s both;
+}
+
+/* =====================================================
+   QUESTION TEXT
+===================================================== */
+
+.question {
+  margin: 0 auto 30px;
+  color: #44335e;
+  font-size: clamp(25px, 4.6vw, 39px);
+  font-weight: 900;
+  line-height: 1.32;
+  letter-spacing: -.7px;
+  text-wrap: balance;
+  animation: questionReveal .65s .25s var(--ease) both;
+}
+
+.question::selection,
+h1::selection {
+  color: white;
+  background: #9b7cdb;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.actions {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 51px;
+  padding: 15px 23px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: clamp(14px, 1.6vw, 16px);
+  font-weight: 900;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    transform .3s var(--ease),
+    box-shadow .3s ease,
+    background .3s ease,
+    color .3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Sliding highlight */
+
+.btn::before {
+  position: absolute;
+  z-index: -1;
+  top: -80%;
+  left: -65%;
+  width: 45%;
+  height: 260%;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.38),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: left .6s ease;
+}
+
+.btn:hover::before {
+  left: 130%;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(.98);
+}
+
+/* Primary */
+
+.btn-primary {
+  color: white;
+  background: linear-gradient(135deg, #a184ed, #7955c1 55%, #6948ad);
+  box-shadow:
+    0 5px 0 #5d409c,
+    0 10px 22px rgba(117, 80, 187, .24),
+    inset 0 1px 0 rgba(255,255,255,.32);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #b29bff, #8d68d6 55%, #7956bf);
+  box-shadow:
+    0 5px 0 #6547a7,
+    0 15px 30px rgba(117, 80, 187, .32),
+    inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+.btn-primary:active {
+  box-shadow: 0 2px 0 #5d409c;
+}
+
+/* Secondary */
+
+.btn-secondary {
+  color: #654d8b;
+  border-color: rgba(127, 94, 177, .12);
+  background: linear-gradient(135deg, #f1eaff, #e8e0fb);
+  box-shadow:
+    0 5px 0 #d6c9f0,
+    0 8px 18px rgba(112, 80, 164, .08),
+    inset 0 1px 0 white;
+}
+
+.btn-secondary:hover {
+  color: #6040a1;
+  background: linear-gradient(135deg, #fff, #e8defe);
+  box-shadow:
+    0 5px 0 #cfc0ef,
+    0 13px 24px rgba(112, 80, 164, .14);
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes ambientFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(35px, -25px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-15px, 25px, 0) scale(.94);
+  }
+}
+
+@keyframes ribbonIn {
+  from {
+    opacity: 0;
+    transform: translateY(-18px) scale(.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(.97);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0) drop-shadow(0 5px 12px rgba(126, 91, 184, .10));
+  }
+}
+
+@keyframes titleShimmer {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+@keyframes underlineReveal {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sceneReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(.97);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes sceneShine {
+  0%, 58% {
+    left: -60%;
+  }
+  78%, 100% {
+    left: 140%;
+  }
+}
+
+@keyframes hotspotPulse {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 25px rgba(255,255,255,.25),
+      0 0 0 2px var(--animal-glow),
+      0 0 15px var(--animal-glow);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 35px rgba(255,255,255,.4),
+      0 0 0 4px var(--animal-glow),
+      0 0 28px var(--animal-glow);
+  }
+}
+
+@keyframes hintFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes backdropReveal {
+  from {
+    background-color: rgba(38, 25, 63, 0);
+  }
+  to {
+    background-color: rgba(38, 25, 63, .52);
+  }
+}
+
+@keyframes dialogEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(38px) scale(.82) rotate(-2deg);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.025) rotate(.5deg);
+  }
+  82% {
+    transform: translateY(2px) scale(.99) rotate(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+@keyframes animalBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(.5) rotate(-12deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-9px) scale(1.12) rotate(5deg);
+  }
+  75% {
+    transform: translateY(3px) scale(.96) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+@keyframes questionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* =====================================================
+   TABLETS
+===================================================== */
+
+@media (max-width: 800px) {
+  .page {
+    padding: 34px 22px 40px;
+  }
+
+  .subtitle {
+    margin-bottom: 28px;
+  }
+
+  .scene {
+    border-width: 5px;
+    border-radius: 26px;
+  }
+
+  .hint {
+    margin-top: 25px;
+  }
+
+  .dialog {
+    width: min(560px, 100%);
+  }
+}
+
+/* =====================================================
+   PHONES
+===================================================== */
+
+@media (max-width: 560px) {
+  .page {
+    padding: 25px 13px 32px;
+  }
+
+  .page > div:first-child {
+    padding: 9px 17px;
+    font-size: 25px !important;
+  }
+
+  h1 {
+    margin-top: 12px;
+    font-size: clamp(32px, 9vw, 43px);
+    letter-spacing: -1px;
+  }
+
+  h1::after {
+    bottom: -9px;
+    height: 4px;
+  }
+
+  .subtitle {
+    margin: 24px auto 25px;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .scene {
+    border-width: 4px;
+    border-radius: 19px;
+  }
+
+  .animal-hotspot {
+    border-width: 2px;
+  }
+
+  .hint {
+    margin-top: 23px;
+    padding: 12px 17px;
+    font-size: 14px;
+  }
+
+  .note {
+    margin-top: 18px;
+  }
+
+  .modal {
+    padding: 14px;
+  }
+
+  .dialog {
+    max-height: calc(100vh - 28px);
+    max-height: calc(100svh - 28px);
+    padding: 32px 19px 25px;
+    border-width: 4px;
+    border-radius: 27px;
+  }
+
+  .close {
+    top: 10px;
+    right: 10px;
+    width: 37px;
+    height: 37px;
+    font-size: 24px;
+  }
+
+  .animal-icon {
+    width: 102px;
+    height: 102px;
+    margin-bottom: 14px;
+    font-size: 61px;
+  }
+
+  .animal-name {
+    margin-bottom: 17px;
+    padding: 8px 14px;
+    font-size: 16px;
+  }
+
+  .question {
+    margin-bottom: 24px;
+    font-size: clamp(25px, 7vw, 32px);
+    line-height: 1.35;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .btn {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 17px;
+    font-size: 15px;
+  }
+}
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 360px) {
+  .page {
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .dialog {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .question {
+    font-size: 24px;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY — REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* Glassmorphism — transparent question card */
+
+.modal {
+  background: rgba(38, 25, 63, 0.30) !important;
+  backdrop-filter: blur(3px) !important;
+  -webkit-backdrop-filter: blur(3px) !important;
+}
+
+.dialog {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 253, 255, 0.76),
+      rgba(245, 239, 255, 0.66) 55%,
+      rgba(255, 248, 244, 0.72)
+    ) !important;
+
+  backdrop-filter: blur(9px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(9px) saturate(125%) !important;
+
+  border: 2px solid rgba(255, 255, 255, 0.82) !important;
+
+  box-shadow:
+    0 20px 65px rgba(38, 25, 63, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Make decorative circles more subtle */
+
+.dialog::before {
+  border-color: rgba(195, 170, 255, 0.10) !important;
+}
+
+.dialog::after {
+  border-color: rgba(255, 170, 205, 0.12) !important;
+}
+
+/* Keep the question readable */
+
+.question {
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.25);
+}
+
+
+</style>
+</head>
+
+<body>
+
+  
+<main class="page">
+
+  <div style="font-size:30px">✨ 🌈 🐾 ✨</div>
+
+  <h1>Meet My Animal Friends!</h1>
+
+  <p class="subtitle">
+    Five friendly animals will be happy to know you.<br>
+    Choose your favorite friend to begin!
+  </p>
+
+  <section class="scene" aria-label="Choose an animal">
+
+    <img
+      src="animals.png"
+      alt="A bunny, bear, cat, lion and elephant"
+    >
+
+    <button class="animal-hotspot" id="bunny"
+      aria-label="Choose Bunny" data-animal="bunny"></button>
+
+    <button class="animal-hotspot" id="bear"
+      aria-label="Choose Bear" data-animal="bear"></button>
+
+    <button class="animal-hotspot" id="cat"
+      aria-label="Choose Cat" data-animal="cat"></button>
+
+    <button class="animal-hotspot" id="lion"
+      aria-label="Choose Lion" data-animal="lion"></button>
+
+    <button class="animal-hotspot" id="elephant"
+      aria-label="Choose Elephant" data-animal="elephant"></button>
+
+  </section>
+
+  <p class="hint">👆 Click on an animal to reveal its question!</p>
+
+  <p class="note">
+    A little game to help us get to know each other 💛
+  </p>
+
+</main>
+
+<!-- نافذة السؤال -->
+<div class="modal" id="modal" role="dialog"
+  aria-modal="true" aria-labelledby="animalName">
+
+  <div class="dialog">
+
+    <button class="close" id="closeBtn"
+      aria-label="Close question">×</button>
+
+    <div class="animal-icon" id="animalIcon">🐰</div>
+
+    <p class="animal-name" id="animalName">
+      Bunny has a question!
+    </p>
+
+    <h2 class="question" id="question">
+      What is your favorite food?
+    </h2>
+
+    <div class="actions">
+
+      <button class="btn btn-primary" id="againBtn">
+        Ask me another! ✨
+      </button>
+
+      <button class="btn btn-secondary" id="backBtn">
+        Back to my friends
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const animals = {
+  bunny: {
+    name: "Bunny",
+    icon: "🐰",
+    question: "What is your favorite food?"
+  },
+
+  bear: {
+    name: "Bear",
+    icon: "🐻",
+    question: "What is your favorite subject at school?"
+  },
+
+  cat: {
+    name: "Cat",
+    icon: "🐱",
+    question: "If you could visit any place in the world, where would you go?"
+  },
+
+  lion: {
+    name: "Lion",
+    icon: "🦁",
+    question: "What do you want to be when you grow up?"
+  },
+
+  elephant: {
+    name: "Elephant",
+    icon: "🐘",
+    question: "What is your favorite cartoon?"
+  }
+};
+
+const modal = document.getElementById("modal");
+const animalIcon = document.getElementById("animalIcon");
+const animalName = document.getElementById("animalName");
+const question = document.getElementById("question");
+
+let lastAnimal = "bunny";
+
+function showQuestion(key) {
+  const animal = animals[key];
+
+  if (!animal) return;
+
+  lastAnimal = key;
+  animalIcon.textContent = animal.icon;
+  animalName.textContent = animal.name + " has a question!";
+  question.textContent = animal.question;
+
+  modal.classList.add("open");
+  document.getElementById("closeBtn").focus();
+}
+
+function closeQuestion() {
+  modal.classList.remove("open");
+}
+
+document.querySelectorAll(".animal-hotspot").forEach(button => {
+  button.addEventListener("click", () => {
+    showQuestion(button.dataset.animal);
+  });
+});
+
+document.getElementById("closeBtn")
+  .addEventListener("click", closeQuestion);
+
+document.getElementById("backBtn")
+  .addEventListener("click", closeQuestion);
+
+document.getElementById("againBtn")
+  .addEventListener("click", () => {
+    const keys = Object.keys(animals)
+      .filter(key => key !== lastAnimal);
+
+    const randomKey = keys[
+      Math.floor(Math.random() * keys.length)
+    ];
+
+    showQuestion(randomKey);
+  });
+
+modal.addEventListener("click", event => {
+  if (event.target === modal) {
+    closeQuestion();
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
